@@ -1,77 +1,57 @@
-export default function Careers() {
-    return (
-          <>
-    {/* Hero */}
-            <section className="relative w-full overflow-hidden" style={{height: '90vh'}}>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{backgroundImage: "url('http://3.141.1.117/wp-content/uploads/2013/06/join-kriya-revgen.jpg')"}}
-        />
-        <div className="absolute inset-0 bg-black/50" />
-          </section>
+'use client';
+import { useState } from 'react';
 
-{/* Careers Form */}
-      <section className="py-16 px-6 bg-white">
-                <div className="max-w-2xl mx-auto">
-                  <h2 className="text-sm tracking-widest uppercase text-gray-700 mb-2">
-                    FILL UP FORM BELOW TO APPLY FOR JOB
-        </h2>
-          <div className="w-48 h-px bg-gray-300 mb-8" />
+export default function CareersPage() {
+  const [form, setForm] = useState({ name:'', phone:'', email:'', position:'', location:'', comments:'' });
+  const set = (k, v) => setForm(p => ({...p, [k]: v}));
 
-                  <a
-            href="mailto:info@still88.com?subject=Job Application"
-            className="inline-block bg-gray-800 text-white text-xs tracking-widest uppercase px-6 py-3 mb-8 hover:bg-gray-700 transition-colors"
-          >
-                          DOWNLOAD FORM
-              </a>
+  return (
+    <>
+      <section className="page-hero">
+        <img src="/images/careers-hero.jpg" alt="Careers" style={{ width:'100%', height:'100%', objectFit:'cover', filter:'grayscale(20%)', opacity:0.6 }} />
+        <div className="page-hero-overlay" />
+      </section>
 
-          <form
-            action="mailto:info@still88.com"
-            method="POST"
-            encType="text/plain"
-            className="space-y-4"
-          >
-                          <div>
-                            <label className="block text-sm text-gray-600 mb-1">Name (required)</label>
-              <input type="text" required className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
+      <section className="section-light">
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <h1 className="section-heading">Fill up form below to <span>apply for job</span></h1>
+          <div className="heading-rule" />
+
+          <form action={`mailto:info@still88.com`} method="post" encType="text/plain">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <div className="form-group">
+                <label className="form-label">Name (required)</label>
+                <input className="form-input" type="text" required value={form.name} onChange={e => set('name', e.target.value)} placeholder="Your full name" />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Phone (required)</label>
-              <input type="tel" required className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
+              <div className="form-group">
+                <label className="form-label">Phone (required)</label>
+                <input className="form-input" type="tel" required value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="Your phone number" />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Email (required)</label>
-              <input type="email" required className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
+              <div className="form-group">
+                <label className="form-label">Email (required)</label>
+                <input className="form-input" type="email" required value={form.email} onChange={e => set('email', e.target.value)} placeholder="Your email address" />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Position Applying For (required)</label>
-              <input type="text" required className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
+              <div className="form-group">
+                <label className="form-label">Position Applying For (required)</label>
+                <input className="form-input" type="text" required value={form.position} onChange={e => set('position', e.target.value)} placeholder="Position" />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Location Applying For (required)</label>
-              <input type="text" required className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
+              <div className="form-group">
+                <label className="form-label">Location Applying For (required)</label>
+                <input className="form-input" type="text" required value={form.location} onChange={e => set('location', e.target.value)} placeholder="Location" />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Upload Your Resume (required)</label>
-              <input type="file" required className="w-full text-sm text-gray-600" />
+              <div className="form-group">
+                <label className="form-label">Upload Your Resume (required)</label>
+                <input className="form-input" type="file" accept=".pdf,.doc,.docx" required style={{ padding: '0.5rem 1rem' }} />
               </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Submit Application Form (required)</label>
-              <input type="file" required className="w-full text-sm text-gray-600" />
-              </div>
-            <div>
-                            <label className="block text-sm text-gray-600 mb-1">Comments</label>
-              <textarea rows={5} className="w-full border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-gray-500" />
-              </div>
-            <button
-              type="submit"
-              className="bg-gray-800 text-white text-xs tracking-widest uppercase px-8 py-3 hover:bg-gray-700 transition-colors"
-            >
-                              APPLY
-                </button>
-                </form>
-                </div>
-                </section>
-                </>
-  )
+            </div>
+            <div className="form-group">
+              <label className="form-label">Comments</label>
+              <textarea className="form-input" rows={5} value={form.comments} onChange={e => set('comments', e.target.value)} placeholder="Additional comments..." style={{ resize: 'vertical' }} />
+            </div>
+            <button type="submit" className="btn-dark">Submit Application</button>
+          </form>
+        </div>
+      </section>
+    </>
+  );
 }
