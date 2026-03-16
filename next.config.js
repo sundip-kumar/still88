@@ -1,15 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-          remotePatterns: [
-            {
-                      protocol: 'http',
-                      hostname: '3.141.1.117',
-                      port: '',
-                      pathname: '/wp-content/uploads/**',
-            },
-                ],
-    },
-}
+  // still88 - updated 2026-03-16
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
